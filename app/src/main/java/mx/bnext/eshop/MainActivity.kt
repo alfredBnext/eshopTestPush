@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                 setApplicationId("843cdf42-c2ee-41d1-a92c-59228b584fa1")
                 setAccessToken("e8Qe39PtBHMfJWOunCQdpY9X")
                 setMarketingCloudServerUrl("https://mc9q6tzd8n0mybmv2n07qygb9fk8.device.marketingcloudapis.com/")
+                setSenderId("899632870828")
                 setMid("534002103")
                 setNotificationCustomizationOptions(
                     NotificationCustomizationOptions.create(R.mipmap.ic_launcher)
@@ -91,19 +92,15 @@ class MainActivity : AppCompatActivity() {
     // Declare the launcher at the top of your Activity/Fragment:
     private val requestPermissionLauncher =
         registerForActivityResult<String, Boolean>(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) {
-                // FCM SDK (and your app) can post notifications.
-            } else {
-                // TODO: Inform user that that your app will not show notifications.
-            }
+
         }
 
     // [START_EXCLUDE]
     @RequiresApi(33) // [END_EXCLUDE]
     private fun askNotificationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
 
-        } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+        } else */if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
             // TODO: display an educational UI explaining to the user the features that will be enabled
             //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
             //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
