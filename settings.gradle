@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { url "https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/repository" }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://salesforce-marketingcloud.github.io/MarketingCloudSDK-Android/repository" }
+    }
+}
+rootProject.name = "eshop"
+include ':app'

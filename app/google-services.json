@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "899632870828",
+    "project_id": "bnexteshop",
+    "storage_bucket": "bnexteshop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899632870828:android:8c3e5a22bd1fb18f803609",
+        "android_client_info": {
+          "package_name": "mx.bnext.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899632870828-0dltruos17gfncvbhdmdpaats91vi0tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmS5NUD0gy8rY5Jea2-Bk30_F1uP6KGfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899632870828-0dltruos17gfncvbhdmdpaats91vi0tk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "899632870828-v6f1rq233k7flqf6mb72do4nmuods9dj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mx.bnext.eshop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
