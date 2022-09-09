@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
         )
 
-        btn.setOnClickListener{
+        btn.setOnClickListener {
             val screen: Screen? = evergage.getScreenForActivity(this)
             val contextEvergage: Context? = evergage.globalContext
             val product = Product("1998968")
@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 contextEvergage?.viewItem(product)
         }
 
+        // TODO: Don't do that, we are not using Evergage SDK for push messaging.
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener { task: Task<String?> ->
                 if (!task.isSuccessful) {
@@ -61,7 +62,8 @@ class MainActivity : AppCompatActivity() {
                 evergage.setFirebaseToken(task.result!!)
             }
 
-        evergage.userId = "19981217"
+        // TODO: Set to the GLUP USER ID as soon as its known.
+        evergage.userId = "bartektesting3"
 
         if (BuildConfig.DEBUG) {
             MarketingCloudSdk.setLogLevel(MCLogListener.VERBOSE)
@@ -74,7 +76,9 @@ class MainActivity : AppCompatActivity() {
                 setApplicationId("843cdf42-c2ee-41d1-a92c-59228b584fa1")
                 setAccessToken("e8Qe39PtBHMfJWOunCQdpY9X")
                 setMarketingCloudServerUrl("https://mc9q6tzd8n0mybmv2n07qygb9fk8.device.marketingcloudapis.com/")
-                setSenderId("899632870828")
+                // TODO: Do not set the senderId if there are multiple push services used eg. Marketing Cloud and Firebase.
+                // TODO: Set the delay of Contact Key registration, so once the GLUP USER ID is known, only then it should be set as ContactKey.
+                setDelayRegistrationUntilContactKeyIsSet(true)
                 setMid("534002103")
                 setNotificationCustomizationOptions(
                     NotificationCustomizationOptions.create(R.mipmap.ic_launcher)
@@ -85,8 +89,36 @@ class MainActivity : AppCompatActivity() {
             Log.d("Alfredo", initStatus.toString())
         }
 
+        // TODO: After the SFMCSdk is initiated device token needs to be set. First set the device token then the Contact Key.
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task: Task<String?> ->
+                if (!task.isSuccessful) {
+                    Log.w("TokenPush", "getInstanceId failed", task.exception)
+                    return@addOnCompleteListener
+                }
+                Log.d("Token", task.result!!)
+                SFMCSdk.requestSdk { sdk ->
+                    sdk.mp {
+                        it.pushMessageManager.setPushToken(task.result!!)
+                    }
+                }
+            }
 
+        // TODO: After the token is set, only then SET THE contactKey with GLUP USER ID
+        SFMCSdk.requestSdk { sdk ->
+            // Set Contact Key
+            sdk.identity.setProfileId(evergage.userId!!)
+
+            // Get Contact Key
+            sdk.mp {
+                val contactKey = it.moduleIdentity.profileId
+                if (contactKey != null) {
+                    Log.d("Contact Key", contactKey)
+                }
+            }
+        }
     }
+
 
     // [START ask_post_notifications]
     // Declare the launcher at the top of your Activity/Fragment:
